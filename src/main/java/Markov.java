@@ -8,7 +8,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Markov() {
+public class Markov {
     // constants
     private static String BEGINS_SENTENCE = "__$";
     private static String PUNCTUATION_MARKS = ".!?$";
@@ -81,14 +81,11 @@ public class Markov() {
      *
      * @param word the word to add
      */
-    void addWord(String prevWord) { // might need to make public
+    public void addWord(String word) {
         if (!words.containsKey(prevWord)) {
             words.put(prevWord, new ArrayList<>());
         }
         words.get(prevWord).add(word);
-        if (!words.containsKey(word)) {
-            words.put(word, new ArrayList<>());
-        }
         if (endsWithPunctuation(word)) {
             prevWord = BEGINS_SENTENCE;
         } else {
