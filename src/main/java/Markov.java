@@ -1,8 +1,8 @@
 /**
- *
- *
- *
- *
+ * Title: Markov.java
+ * Abstract:
+ * Author: Leonardo Lopez
+ * Date: 3/6/26
  */
 import java.io.*;
 import java.util.*;
@@ -50,27 +50,50 @@ public class Markov() {
             e.printStackTrace();
         }
     }
-    void addWord(String prevWord) {
-
+    void addWord(String prevWord) { // might need to make public
+        if (!words.containsKey(prevWord)) {
+            words.put(prevWord, new ArrayList<>());
+        }
+        words.get(prevWord).add(word);
+        if (!words.containsKey(word)) {
+            words.put(word, new ArrayList<>());
+        }
+        if (endsWithPunctuation(word)) {
+            prevWord = BEGINS_SENTENCE;
+        } else {
+            prevWord = word;
+        }
     }
-    String randomWord(String word) {
-
+    String randomWord(String word) { // might need to make public
+        ArrayList<String> list = words.get(word);
+        if (list == null || list.size() == 0) {
+            return null;
+        }
+        if (list.size() == 1) {
+            return list.get(0);
+        }
+        Random rand = new Random();
+        return list.get(rand.nextInt(list.size()));
     }
     public String toString() {
-
+        return words.toString();
     }
 
     public HashMap<String, ArrayList<String>> getWords() {
         return words;
     }
-    void addLine(String line) {
+    void addLine(String line) { // might need to make public
         Scanner sc = new Scanner(line);
         while (sc.hasNext()) {
             addWord(sc.next());
         }
         sc.close();
     }
-    public static boolean endsWithPunctuation(String senString) {
-
+    public static boolean endsWithPunctuation(String word) {
+        if (word == null || word.length() == 0) {
+            return false;
+        }
+        char last = word.charAt(word.length() - 1);
+        return PUNCTUATION_MARKS.indexOf(last) >= 0;
     }
 }
