@@ -1,6 +1,7 @@
 /**
  * Title: Markov.java
- * Abstract:
+ * Abstract: A program will read a text file, generate a collection of words and words that follow
+ *           that word, and will then use those words to generate new text.
  * Author: Leonardo Lopez
  * Date: 3/6/26
  */
